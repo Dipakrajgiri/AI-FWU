@@ -1,23 +1,37 @@
+% Knowledge Base
 male(ram).
 male(luv).
 male(laxman).
 male(bharat).
 male(shatrughan).
 male(dashrath).
+male(ayodhya).
+male(king).
 
 female(sita).
 female(urmila).
 female(kaushalya).
+female(satyabama).
+female(shubalaxmi).
+female(chandrabhaga).
 
 wife(sita, ram).
 wife(laxman, urmila).
 wife(kaushalya, dashrath).
+wife(ayodhya, king).
+wife(satyabama, ayodhya).
+wife(shubalaxmi, luv).
+wife(chandrabhaga, shatrughan).
+
 father(ram, luv).
 father(ram, kush).
 father(dashrath, ram).
 father(dashrath, laxman).
 father(dashrath, bharat).
 father(dashrath, shatrughan).
+father(king, satyabama).
+father(luv, ayodhya).
+father(luv, shubalaxmi).
 
 mother(X, Y) :- father(Z, Y), wife(X, Z).
 parent(X, Y) :- father(X,Y); mother(X, Y).
@@ -34,3 +48,6 @@ uncle(X, Y) :- male(X), child(Y, Z), brother(X, Z).
 aunt(X, Y) :- female(X), child(Y, Z), (sister(X, Z); (wife(X, T), brother(T, Z))).
 
 ancestor(X, Y) :- parent(X, Y); parent(Z, Y), ancestor(X, Z).
+
+grandfather(X, Y) :- father(X, Z), parent(Z, Y).
+grandmother(X, Y) :- mother(X, Z), parent(Z, Y).
